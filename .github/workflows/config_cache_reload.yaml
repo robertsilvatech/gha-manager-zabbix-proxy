@@ -1,0 +1,14 @@
+name: Config cache reload
+run-name: Config
+on: workflow_dispatch
+
+jobs:
+  teste:
+    runs-on: zabbix-proxy-sp
+    steps:
+      - name: Reload cache
+        run: |
+          zabbix_proxy -R config_cache_reload
+      - name: Check log
+        run: |
+          tail -n 20 /var/log/zabbix/zabbix_proxy
