@@ -39,6 +39,9 @@ jobs:
     runs-on: ${{ inputs.proxy }}
     environment: ${{ inputs.proxy }}
     needs: check_current_config
+    env:
+      ZBX_STARTPOLLERS=${{ inputs.start_pollers }}
+      ZBX_STARTTRAPPERS=${{ inputs.start_trappers }}
     steps:
       - name: Update config
         run: |
