@@ -9,21 +9,30 @@ on:
         options:
           - zabbix-proxy-sp
           - zabbix-proxy-rj
-    
+      start_pollers:
+        descript: StartPollers
+        type: string
+        required: false
+      start_trappers:
+        descript: StartPollers
+        type: string
+        required: false   
 
 jobs:
   check_current_config:
     runs-on: ${{ inputs.proxy }}
     steps:
-      - name: Get data
+      - name: Get data current
         run: |
           STARTPOLLERS=$(cat /etc/zabbix/zabbix_proxy.conf |grep StartPollers=)
           echo $STARTPOLLERS
           STARTTRAPPERS=$(cat /etc/zabbix/zabbix_proxy.conf |grep StartTrappers=)
           echo "## Dados atuais do ambiente são: " >> $GITHUB_STEP_SUMMARY
-          echo "- StartPollers=$STARTPOLLERS" >> $GITHUB_STEP_SUMMARY
-          echo "- StartTrappers=$STARTTRAPPERS" >> $GITHUB_STEP_SUMMARY
-
+          echo "- $STARTPOLLERS" >> $GITHUB_STEP_SUMMARY
+          echo "- $STARTTRAPPERS" >> $GITHUB_STEP_SUMMARY        
+          echo "## Novos parâmetros para atualização: " >> $GITHUB_STEP_SUMMARY
+          echo "StartPollers=${{ inputs.start_pollers }} " >> $GITHUB_STEP_SUMMARY
+          echo "StartTrappers=${{ inputs.start_trappers }} " >> $GITHUB_STEP_SUMMARY
   test_review:
     runs-on: ${{ inputs.proxy }}
     environment: ${{ inputs.proxy }}
