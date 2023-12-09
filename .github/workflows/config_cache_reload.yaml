@@ -1,5 +1,5 @@
 name: Config cache reload
-run-name: Config
+run-name: Force config cache reload on ${{ inputs.proxy }}
 on: 
   workflow_dispatch:
     inputs:
