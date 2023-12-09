@@ -1,7 +1,7 @@
 name: Config cache reload
 run-name: Config
 on: 
-  workflow_dispatch
+  workflow_dispatch:
     inputs:
       proxy:
         description: Zabbix proxy name
