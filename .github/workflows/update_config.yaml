@@ -17,10 +17,9 @@ jobs:
     steps:
       - name: Get data
         run: |
-          conf=$(cat /etc/zabbix/zabbix_proxy.conf)
           STARTPOLLERS=$(cat /etc/zabbix/zabbix_proxy.conf |grep StartPollers=)
           echo $STARTPOLLERS
-          STARTTRAPPERS=cat /etc/zabbix/zabbix_proxy.conf |grep StartTrappers=
+          STARTTRAPPERS=$(cat /etc/zabbix/zabbix_proxy.conf |grep StartTrappers=)
           echo "## Dados atuais do ambiente são: " >> $GITHUB_SUMMARY
           echo "- StartPollers=$STARTPOLLERS" >> $GITHUB_SUMMARY
           echo "- StartTrappers=$STARTTRAPPERS" >> $GITHUB_SUMMARY
@@ -28,6 +27,7 @@ jobs:
   test_review:
     runs-on: ${{ inputs.proxy }}
     environment: ${{ inputs.proxy }}
+    needs: check_current_config
     steps:
       - name: Dummy copy
         run: |
