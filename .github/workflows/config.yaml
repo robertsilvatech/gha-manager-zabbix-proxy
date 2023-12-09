@@ -1,0 +1,10 @@
+name: Config Zabbix Proxy
+run-name: Config
+
+jobs:
+  teste:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Teste 1
+        run: |
+          echo "Olá"
