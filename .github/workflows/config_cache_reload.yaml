@@ -4,8 +4,8 @@ on: workflow_dispatch
 
 inputs:
   proxy:
-    type: choice
     description: Zabbix proxy name
+    type: choice
     options:
       - zabbix-proxy-sp
       - zabbix-proxy-rj
