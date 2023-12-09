@@ -1,14 +1,14 @@
 name: Config cache reload
 run-name: Config
-on: workflow_dispatch
-
-inputs:
-  proxy:
-    description: Zabbix proxy name
-    type: choice
-    options:
-      - zabbix-proxy-sp
-      - zabbix-proxy-rj
+on: 
+  workflow_dispatch
+    inputs:
+      proxy:
+        description: Zabbix proxy name
+        type: choice
+        options:
+          - zabbix-proxy-sp
+          - zabbix-proxy-rj
 
 jobs:
   config_cache_reload:
