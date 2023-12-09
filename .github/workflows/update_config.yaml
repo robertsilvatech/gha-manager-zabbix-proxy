@@ -33,11 +33,12 @@ jobs:
           echo "## Novos parâmetros para atualização: " >> $GITHUB_STEP_SUMMARY
           echo "StartPollers=${{ inputs.start_pollers }} " >> $GITHUB_STEP_SUMMARY
           echo "StartTrappers=${{ inputs.start_trappers }} " >> $GITHUB_STEP_SUMMARY
-  test_review:
+  update_config:
     runs-on: ${{ inputs.proxy }}
     environment: ${{ inputs.proxy }}
     needs: check_current_config
     steps:
-      - name: Dummy copy
+      - name: Update config
         run: |
-          echo "Copiando novo arquivo"
+          chmod +x scripts/update_proxy.sh
+          scripts/update_proxy.sh
