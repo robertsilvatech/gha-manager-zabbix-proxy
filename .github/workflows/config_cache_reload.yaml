@@ -14,6 +14,10 @@ jobs:
   config_cache_reload:
     runs-on: ${{ inputs.proxy }}
     steps:
+      - name: Show info vm
+        run: |
+          default_ip=$(ip r |grep default | awk '{print $3}')
+          echo $HOSTNAME - $default_ip
       - name: Reload cache
         run: |
           zabbix_proxy -R config_cache_reload
