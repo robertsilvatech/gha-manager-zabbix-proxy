@@ -1,0 +1,34 @@
+name: Update config
+run-name: Update config on ${{ inputs.proxy }}
+on: 
+  workflow_dispatch:
+    inputs:
+      proxy:
+        description: Zabbix proxy name
+        type: choice
+        options:
+          - zabbix-proxy-sp
+          - zabbix-proxy-rj
+    
+
+jobs:
+  check_current_config:
+    runs-on: ${{ inputs.proxy }}
+    steps:
+      - name: Get data
+        run: |
+          conf=$(cat /etc/zabbix/zabbix_proxy.conf)
+          STARTPOLLERS=$(cat /etc/zabbix/zabbix_proxy.conf |grep StartPollers=)
+          echo $STARTPOLLERS
+          STARTTRAPPERS=cat /etc/zabbix/zabbix_proxy.conf |grep StartTrappers=
+          echo "## Dados atuais do ambiente são: " >> $GITHUB_SUMMARY
+          echo "- StartPollers=$STARTPOLLERS" >> $GITHUB_SUMMARY
+          echo "- StartTrappers=$STARTTRAPPERS" >> $GITHUB_SUMMARY
+
+  test_review:
+    runs-on: ${{ inputs.proxy }}
+    environment: ${{ inputs.proxy }}
+    steps:
+      - name: Dummy copy
+        run: |
+          echo "Copiando novo arquivo"
