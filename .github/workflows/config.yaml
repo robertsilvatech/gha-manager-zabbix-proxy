@@ -1,5 +1,6 @@
 name: Config Zabbix Proxy
 run-name: Config
+on: workflow_dispatch
 
 jobs:
   teste:
